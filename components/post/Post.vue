@@ -30,7 +30,7 @@ export default defineComponent({
       </div>
     </div>
     <div class="post-body__title">
-      <NuxtLink to="/">
+      <NuxtLink :to="`/posts/${post.id}`">
         {{post.title}}
       </NuxtLink>
     </div>
