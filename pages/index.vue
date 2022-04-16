@@ -1,4 +1,4 @@
 <template>
-  <Preview/>
+  <Login/>
 </template>
 

@@ -1,0 +1,21 @@
+:root {
+  --color-purple: #8d00ff;
+  .container {
+    margin: 0 auto;
+    max-width: 1140px;
+  }
+  .ant-form {
+    width: 400px;
+
+  }
+  .ant-form-item {
+    margin: 0;
+    &-label {
+      label {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 42px;
+      }
+    }
+  }
+}

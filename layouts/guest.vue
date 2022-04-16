@@ -3,20 +3,13 @@ import {
   defineComponent
 } from '#app';
 
-import Header from '@/components/Header/Header.vue'
-import Footer from '@/components/Footer/Footer.vue'
 export default defineComponent({
-  components: {
-    Header, Footer
-  }
 });
 </script>
 
 <template>
   <div class="gradient-layout">
-    <Header />
-    <Nuxt style="flex: 1 0 auto" class="container" />
-    <Footer />
+    <Nuxt />
   </div>
 </template>
 <style lang="scss" scoped>
