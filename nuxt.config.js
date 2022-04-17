@@ -2,10 +2,11 @@ import { defineNuxtConfig } from '@nuxt/bridge';
 
 export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
   bridge: {
     nitro: false
   },
+  ssr: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'NeHabr',
@@ -32,7 +33,7 @@ export default defineNuxtConfig({
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui',
-    // '@/plugins/firebase',
+    '@/plugins/firebase',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

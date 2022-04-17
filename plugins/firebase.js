@@ -1,5 +1,7 @@
 // Import the functions you need from the SDKs you need
-import firebase from 'firebase'
+import { initializeApp } from 'firebase/app'
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,16 +16,24 @@ const firebaseConfig = {
   appId: "1:942931705100:web:a8ea6fcd4536a5a0f9dd29",
   measurementId: "G-XS2P4NHJSJ"
 };
-
+console.log('firebase');
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-let app = null
-// prevent initializing firebase more than once
-if (!firebase.apps.length) { 
-  app = firebase.initializeApp(firebaseConfig)
+async function getPosts(db) {
+  const postsCol = collection(db, 'posts');
+  const postSnapshot = await getDocs(postsCol);
+  const postList = postSnapshot.docs.map(doc => doc.data());
+  return postList;
 }
+// const add = (async () => await addDoc(test, {'test': "jopa"}));
+
+
+// getPosts(db).then((data) => {
+//   console.log('data', data);
+// })
+// prevent initializing firebase more than once
 export default (ctx, inject) => {
-  inject('firebase', firebase)
+  inject('db', db);
 }

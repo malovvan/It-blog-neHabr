@@ -1,13 +1,26 @@
 <script lang="ts">
 import {
-  defineComponent
+  defineComponent, useNuxtApp
 } from '#app';
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
 
-import Header from '@/components/Header/Header.vue'
-import Footer from '@/components/Footer/Footer.vue'
+import Header from '~/components/header/VHeader.vue'
+import Footer from '~/components/footer/VFooter.vue'
 export default defineComponent({
   components: {
     Header, Footer
+  },
+
+  setup() {
+    const { $store, $db } = useNuxtApp();
+    // async function getPosts(db: any) {
+    //   const postsCol = collection(db, 'posts');
+    //   const postSnapshot = await getDocs(postsCol);
+    //   const postList = postSnapshot.docs.map(doc => doc.data());
+    //   return postList;
+    // }
+    $store.dispatch('getPosts', $db)
+    console.log('db',  $store);
   }
 });
 </script>
