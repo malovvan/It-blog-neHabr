@@ -13,14 +13,7 @@ export default defineComponent({
 
   setup() {
     const { $store, $db } = useNuxtApp();
-    // async function getPosts(db: any) {
-    //   const postsCol = collection(db, 'posts');
-    //   const postSnapshot = await getDocs(postsCol);
-    //   const postList = postSnapshot.docs.map(doc => doc.data());
-    //   return postList;
-    // }
     $store.dispatch('getPosts', $db)
-    console.log('db',  $store);
   }
 });
 </script>
@@ -40,5 +33,9 @@ export default defineComponent({
   background: linear-gradient(110.86deg, #edd8f4 12.77%, #FFFFFF 59.13%);
   width: 100%;
   height: 100%;
+}
+.container {
+  margin-top: 50px;
+
 }
 </style>

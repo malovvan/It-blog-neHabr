@@ -5,7 +5,6 @@ export default defineComponent({
   setup() {
     const { $store } = useNuxtApp();
     const posts = computed(() => $store.state.postList)
-
     return {
       posts
     }

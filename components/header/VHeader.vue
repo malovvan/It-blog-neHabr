@@ -40,7 +40,8 @@
       justify-content: space-between;
 		}
     &__profile {
-
+      display: flex;
+      align-items: center;
     }
     &-nav {
       display: flex;

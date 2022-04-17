@@ -1,5 +1,10 @@
 :root {
   --color-purple: #8d00ff;
+  --color-purple-1: #d340ff;
+  --color-purple-2: #ac40ff;
+  a {
+    color: rgba($color: #000000, $alpha: 0.85);
+  }
   .container {
     margin: 0 auto;
     max-width: 1140px;
@@ -17,5 +22,15 @@
         line-height: 42px;
       }
     }
+  }
+  .ant-input {
+    &:hover, &:focus {
+      border-color: var(--color-purple-1);
+    }
+    margin-bottom: 10px;
+  }
+  .ant-btn-primary {
+    background-color: var(--color-purple-2);
+    border-color: var(--color-purple-2);
   }
 }

@@ -5,9 +5,6 @@ export default defineComponent({
   components: {
     CatalogPosts
   },
-  setup() {
-    
-  },
 })
 </script>
 
