@@ -18,6 +18,7 @@
     "firebase": "9.6.11",
     "nuxt-edge": "latest",
     "sass": "^1.35.2",
+    "vuex-persistedstate": "^4.1.0",
     "webpack": "^4.46.0"
   },
   "devDependencies": {

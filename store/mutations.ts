@@ -8,4 +8,7 @@ export default {
   SET_USER_DATA: (state: any, data: any) => {
     state.user = data;
   },
+  SET_AUTH_STATE: (state: any, authState: any) => {
+    state.isAuthorized = authState;
+  },
 };

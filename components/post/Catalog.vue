@@ -22,6 +22,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 30px;
+  row-gap: 40px;
   margin-top: 50px;
 }
 </style>

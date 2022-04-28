@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   bridge: {
     nitro: false
   },
+  alias: {
+    tslib: 'tslib/tslib.es6.js'
+  },
   ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -34,6 +37,7 @@ export default defineNuxtConfig({
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/firebase',
+    '@/plugins/vuexPersistedState',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,25 +53,10 @@ export default defineNuxtConfig({
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // [
-    //   '@nuxtjs/firebase',
-    //   {
-    //     config: {
-    //       apiKey: 'AIzaSyBp8FeoTpbGVLvbkp6Vk9aIy9CiTrS6rS0',
-    //       authDomain: 'it-blog-nehabr.firebaseapp.com',
-    //       projectId: "it-blog-nehabr",
-    //       storageBucket: "it-blog-nehabr.appspot.com",
-    //       messagingSenderId: "942931705100",
-    //       appId: "1:942931705100:web:a8ea6fcd4536a5a0f9dd29",
-    //       measurementId: "G-XS2P4NHJSJ"
-    //     },
-    //     services: {
-    //       auth: true // Just as example. Can be any other service.
-    //     }
-    //   }
-    // ]
   ],
-
+  router: {
+    middleware: 'requireAuth'
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308

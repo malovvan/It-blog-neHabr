@@ -16,3 +16,14 @@ export const createPost = async function ({ commit }: any, {db, post}: any) {
   });
   return post;
 };
+
+export const signIn = async function (this: any, { commit }: any, email: any) {
+    commit('SET_AUTH_STATE', true);
+    commit('SET_USER_DATA', { email });
+    
+};
+
+export const signOut = async function (this: any, { commit }: any, email: any) {
+  commit('SET_AUTH_STATE', null);
+  commit('SET_USER_DATA', null);
+};

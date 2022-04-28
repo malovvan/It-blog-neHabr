@@ -1,3 +1,21 @@
+<script lang="ts">
+import { defineComponent, useNuxtApp, useRouter } from '#app'
+
+export default defineComponent({
+  setup() {
+    const { $store } = useNuxtApp();
+    const router = useRouter();
+    const logout = () => {
+      $store.dispatch('signOut');
+      router.push('login');
+    }; 
+    return {
+      logout
+    }
+  },
+})
+</script>
+
 <template>
   <div class="header">
     <div class="header__content container">
@@ -24,8 +42,9 @@
       
       <div class="header__profile">
         <NuxtLink to="/posts/new/">
-          <h3>Добавить статью</h3>
+          <span>Добавить статью</span>
          </NuxtLink>
+         <span class="header-signout" v-text="'Выйти'" @click="logout" />
       </div>
     </div>
   </div>
@@ -42,6 +61,8 @@
     &__profile {
       display: flex;
       align-items: center;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
     }
     &-nav {
       display: flex;
@@ -54,6 +75,10 @@
         box-shadow: inset 0 -3px 0 0 var(--color-purple);
         cursor: pointer;
       }
+    }
+    &-signout {
+      margin-left: 30px;
+      cursor: pointer;
     }
 }
 

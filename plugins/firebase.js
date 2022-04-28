@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,7 +24,12 @@ const db = getFirestore(app);
 
 // Initialize storage
 const storage = getStorage();
+
+// Initialize auth
+const auth = getAuth(app);
+
 export default (ctx, inject) => {
   inject('db', db);
   inject('fireStorage', storage) 
+  inject('auth', auth) 
 }

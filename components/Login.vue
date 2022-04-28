@@ -1,16 +1,27 @@
 <script lang="ts">
-import { defineComponent, ref, useRoute, useRouter } from '#app'
+import { defineComponent, ref, useNuxtApp, useRouter } from '#app'
 import axios from 'axios'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default defineComponent({
   layout: 'guest',
   setup() {
+    const { $auth, $store } = useNuxtApp();
     const name = ref('');
     const password = ref('');
     const router = useRouter();
     const onSubmit = () => {
-      console.log('submit!', name.value, password.value);
-      router.push('posts/')
+      signInWithEmailAndPassword($auth, name.value, password.value)
+      .then((userCredential) => {
+        $store.dispatch('signIn', userCredential.user.reloadUserInfo.email)
+        router.push('posts/')
+
+      })
+      .catch((error) => {
+        console.log('errors', error)
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
     };
 
     // async function jopa() {

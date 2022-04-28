@@ -1,6 +1,6 @@
 <script lang="ts">
 import {
-  defineComponent, useNuxtApp
+  defineComponent, useNuxtApp, useRoute
 } from '#app';
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
 
@@ -13,14 +13,18 @@ export default defineComponent({
 
   setup() {
     const { $store, $db } = useNuxtApp();
+    const route = useRoute();
     $store.dispatch('getPosts', $db)
+    return {
+      route
+    }
   }
 });
 </script>
 
 <template>
   <div class="gradient-layout">
-    <Header />
+    <Header v-if="route.name !== 'login'" />
     <Nuxt style="flex: 1 0 auto" class="container" />
     <Footer />
   </div>
