@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref, useNuxtApp, useRouter } from '#app'
-import axios from 'axios'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 
 export default defineComponent({
   layout: 'guest',
@@ -9,29 +8,35 @@ export default defineComponent({
     const { $auth, $store } = useNuxtApp();
     const name = ref('');
     const password = ref('');
+    const passwordCheck = ref('');
     const router = useRouter();
     const onSubmit = () => {
-      signInWithEmailAndPassword($auth, name.value, password.value)
-      .then((userCredential) => {
-        $store.dispatch('signIn', userCredential.user.reloadUserInfo.email)
-        router.push('posts/')
+      if (password.value === passwordCheck.value) {
+        createUserWithEmailAndPassword ($auth, name.value, password.value)
+          .then((userCredential: any) => {
+            console.log('userCredential', userCredential);
+            $store.dispatch('signIn', userCredential.user.reloadUserInfo.email)
+            router.push('/posts/')
 
-      })
-      .catch((error) => {
-        console.log('errors', error)
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-    };
+          })
+          .catch((error) => {
+            console.log('errors', error)
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage)
+          });
+      } else {
+        alert('Пароли не совпадают')
+      }
+      }
+        
 
-    // async function jopa() {
-    //   const test = await axios.get('https://it-blog-nehabr-default-rtdb.europe-west1.firebasedatabase.app/tests.json')
-    //   console.log(test)
-    // }
+
     return {
       onSubmit,
       name,
-      password
+      password,
+      passwordCheck,
     }
   },
 })
@@ -40,17 +45,20 @@ export default defineComponent({
   <div class="container">
     <div class="login-form">
       <a-form>
-      <a-form-item label="Введите имя">
+      <a-form-item label="Введите email">
         <a-input v-model="name" />
       </a-form-item>
       <a-form-item label="Введите пароль">
         <a-input v-model="password" type="password" />
       </a-form-item>
+      <a-form-item label="Повторите пароль">
+        <a-input v-model="passwordCheck" type="password" />
+      </a-form-item>
       <a-form-item class="login-footer">
         <a-button block type="primary" @click="onSubmit">Войти</a-button>
       </a-form-item>
       <div class="login-register">
-        <router-link to="/register/"> Зарегистрироваться</router-link>
+        <router-link to="/login/"> Уже есть аккаунт? Войти</router-link>
       </div>
     </a-form>
     </div>
@@ -87,10 +95,10 @@ export default defineComponent({
     
   }
 }
+
 .login-register {
   margin-top: 20px;
   font-weight: 600;
   color: #9d13a6;
-
 }
 </style>

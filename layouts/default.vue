@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
   <div class="gradient-layout">
-    <Header v-if="route.name !== 'login'" />
+    <Header v-if="!['login', 'register'].includes(route.name)" />
     <Nuxt style="flex: 1 0 auto" class="container" />
     <Footer />
   </div>
