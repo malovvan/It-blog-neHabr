@@ -1,6 +1,5 @@
 import fetchPostsRequest from '@/api/requests/fetchPosts';
 import createPostRequest from '@/api/requests/createPost';
-import { Post } from '~/types/models/Post';
 
 export const getPosts = async function ({ commit }: any, db: any) {
   const posts = await fetchPostsRequest(db);

@@ -19,6 +19,6 @@ export default defineComponent({
   flex-direction: column;
   background: linear-gradient(110.86deg, #edd8f4 12.77%, #FFFFFF 59.13%);
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 </style>

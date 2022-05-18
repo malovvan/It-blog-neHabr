@@ -1,11 +1,15 @@
 <script lang="ts">
-import { defineComponent, computed, useNuxtApp } from '#app'
+import { defineComponent, computed, useNuxtApp, watch } from '#app'
 
 export default defineComponent({
   setup() {
-    const { $store } = useNuxtApp();
+    const { $store,  $db } = useNuxtApp();
 
     const posts = computed(() => $store.state.postList)
+
+    if (!posts.value) {
+      $store.dispatch('getPosts', $db)
+    }
     return {
       posts
     }
@@ -15,7 +19,7 @@ export default defineComponent({
 
 <template>
   <div class="catalog-posts">
-    <Post v-for="post in posts" :key="post.id" :post="post" />
+    <Post v-for="post in posts" :key="post.id" :post="post"  />
   </div>
 </template>
 <style lang="scss" scoped>
